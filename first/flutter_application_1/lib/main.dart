@@ -3,13 +3,10 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(const MyApp());
 
-  // Liste 
+  // liste 
   List<int> notes = [100, 8, 9];
-
-  // Set : pas de doublon, pas ordonné
+  // set pas de doublon, pas ordonné
   Set<String> color = {"blue", "red", "yellow"};
-
-  // Map
   Map<String, int> pi = {
     "john": 40,
     "rwan": 18,
@@ -30,26 +27,44 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.blue),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("Apprentissage", textAlign: TextAlign.center),
+          centerTitle: true,
+          title: const Text("Apprentissage"),
           backgroundColor: Colors.blueAccent,
           leading: const Icon(Icons.menu),
-          actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.favorite))],
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.favorite))
+          ],
         ),
         backgroundColor: const Color.fromARGB(255, 38, 255, 208),
-        body: GridView.count(
-          crossAxisCount: 2,
-          children: List.generate(20, (index) {
-            return Container(
-              margin: const EdgeInsets.all(20),
-              color: Colors.blue.shade300,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: () => print("container cliqué"),
               child: Center(
-                child: Text(
-                  "${index + 1}",
-                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                child: Stack(
+                  children: [
+                    Container(
+                      color: Colors.blue.shade300,
+                      width: 200,
+                      height: 200,
+                      child: Center(
+                        child: Text(
+                          "je suis le lutin gronon",
+                          style: TextStyle(
+                            color: Colors.amber.shade700,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            );
-          }),
+            ),
+          ],
         ),
       ),
     );
