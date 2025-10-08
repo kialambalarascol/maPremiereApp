@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Pages/accueil.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,50 +24,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      
       title: 'lesson1',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text("Apprentissage"),
-          backgroundColor: Colors.blueAccent,
-          leading: const Icon(Icons.menu),
-          actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.favorite))
-          ],
-        ),
-        backgroundColor: const Color.fromARGB(255, 38, 255, 208),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: () => print("container cliqué"),
-              child: Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      color: Colors.blue.shade300,
-                      width: 200,
-                      height: 200,
-                      child: Center(
-                        child: Text(
-                          "je suis le lutin gronon",
-                          style: TextStyle(
-                            color: Colors.amber.shade700,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      home: Accueil()
     );
   }
 }
