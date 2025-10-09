@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -7,8 +10,27 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
+
 class _HomeState extends State<Home> {
 
+@override
+void initState() {
+  super.initState();
+  chargement(); 
+  String json =jsonEncode(Notes);
+}
+
+Future <void> chargement()async{
+  final prefs = await SharedPreferences.getInstance();
+  setState(() {
+    
+    String? json = prefs.getString('notes');
+    List<dynamic> jsonList = jsonDecode(Json);
+List<Map<String, String>> Notes = jsonList.map((e) => Map<String, String>.from(e)).toList();
+
+  });
+
+}
 List <Map<String,String>> Notes = [] ;
 
   TextEditingController titre = TextEditingController(); 
