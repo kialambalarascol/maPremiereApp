@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Pages/support.dart';
 
-class Accueil extends StatelessWidget {
+  
+   
+class Accueil extends StatefulWidget {
   const Accueil({super.key});
 
   @override
+  State<Accueil> createState() => _AccueilState();
+}
+
+class _AccueilState extends State<Accueil> {
+  void liste(int index) =>setState((){selectedIndex =index;})  ;
+  
+   
+
+  int selectedIndex = 0;
+
+final pages =[Home() ];
+
+  @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: const Color(0xFFF9F9F9),
       appBar: AppBar(
@@ -13,43 +28,78 @@ class Accueil extends StatelessWidget {
         title: const Text("Accueil"),
       ),
       drawer: Drawer(
-        backgroundColor: const Color(0xFFF9F9F9),
         child: ListView(
-          children: const [
+          children: [
             DrawerHeader(
-              child: ListTile(
-                title: Text("Menu"),
+              child: Icon(Icons.person_2_rounded,size: 100,),
               ),
-            )
+
+              ListTile(
+                title: Text("accueil"),
+                leading: Icon(Icons.home),
+                onTap: () => Navigator.pop(context),
+              ),
+              ListTile(
+                title: Text("support"),
+                leading: Icon(Icons.support_agent),
+                onTap: () => Navigator.pushNamed(context, "/support"),
+              ),        
           ],
-        ),
+          ),
       ),
+      bottomNavigationBar:BottomNavigationBar
+      (items :  [
+        BottomNavigationBarItem (icon: Icon(Icons.home),label:"Accueil" ),
+        BottomNavigationBarItem(icon: Icon(Icons.support_agent), label: "Support")
+      ],currentIndex: selectedIndex ,
+      onTap: liste,
+      ),
+      body: pages[selectedIndex],
+    );
+   
+  }
+}
+
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+
+  TextEditingController demande = TextEditingController(); 
+
+  String recupNom = "";
+  void message() => setState(() {recupNom = "Bonjour ${demande.text}";});
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Support()),
-            );
-          },
-          child: const Text(
-            "Page de Support",
-            style: TextStyle(color: Colors.purple),
+        child:Padding(
+          padding:EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            spacing: 10,
+            children:[
+              Text("yo dit un truc"),
+              TextField(
+                controller: demande,
+                decoration: InputDecoration(
+                  label: Text("vsy Franky"),
+                  hintText: " allez mon reuf !",
+                  border: OutlineInputBorder(),
+                  
+                )
+                ),
+              ElevatedButton(onPressed: () {message();
+              } , child: Text("Envoyer")),
+              Text(recupNom),
+              ],
           ),
         ),
-      ),
-
-      /// ✅ Le bouton flottant violet
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Action du bouton
-        },
-        backgroundColor: Color(0xFFF9F9F9), // Violet
-        child: const Icon(
-          Icons.add_rounded,
-          color: Colors.purple, // Icône blanche
-          size: 32,
-        ),
+        
       ),
     );
   }
