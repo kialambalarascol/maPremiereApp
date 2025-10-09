@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_application_1/update_manager.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -20,10 +19,9 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     chargement();
-    UpdateManager.checkForUpdate(context);
   }
 
-  /// --- CHARGEMENT DES NOTES DEPUIS SHARED_PREFERENCES --- pas compris
+  /// --- CHARGEMENT DES NOTES DEPUIS SHARED_PREFERENCES ---
   Future<void> chargement() async {
     final prefs = await SharedPreferences.getInstance();
     String? jsonString = prefs.getString('notes');
@@ -36,7 +34,7 @@ class _HomeState extends State<Home> {
     }
   }
 
-  /// --- SAUVEGARDE DES NOTES --- pas compris
+  /// --- SAUVEGARDE DES NOTES ---
   Future<void> sauvegarde() async {
     final prefs = await SharedPreferences.getInstance();
     String jsonString = jsonEncode(Notes);
@@ -52,13 +50,14 @@ class _HomeState extends State<Home> {
       titre.clear();
       contenu.clear();
     });
-    sauvegarde(); 
+    sauvegarde();
   }
+
   void suppression(int index) {
     setState(() {
       Notes.removeAt(index);
     });
-    sauvegarde(); // 🔥 sauvegarde après suppression
+    sauvegarde();
   }
 
   @override
@@ -94,7 +93,6 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     onTap: () {
-                      // ✅ navigation vers la page note + passage d'arguments
                       Navigator.pushNamed(
                         context,
                         '/note',
@@ -159,8 +157,7 @@ class _HomeState extends State<Home> {
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content:
-                                    Text("Remplis au moins le titre 😅"),
+                                content: Text("Remplis au moins le titre 😅"),
                                 backgroundColor: Colors.red,
                                 duration: Duration(seconds: 2),
                               ),
@@ -189,3 +186,4 @@ class _HomeState extends State<Home> {
     );
   }
 }
+  
