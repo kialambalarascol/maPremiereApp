@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/home.dart';
+import 'package:flutter_application_1/pages/note.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 
-void main() {
+/// --- MAIN AVEC INITIALISATION DE FLUTTER_DOWNLOADER ---
+Future<void> main() async {
+  // Nécessaire avant d'appeler du code asynchrone dans main()
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialisation du gestionnaire de téléchargement
+  await FlutterDownloader.initialize(
+    debug: true, // Laisser true pour voir les logs, mettre false en production
+    ignoreSsl: true, // utile pour GitHub, sinon certaines URLs https peuvent échouer
+  );
+
   runApp(const MyApp());
-
-  // liste 
-  List<int> notes = [100, 8, 9];
-  // set pas de doublon, pas ordonné
-  Set<String> color = {"blue", "red", "yellow"};
-  Map<String, int> pi = {
-    "john": 40,
-    "rwan": 18,
-  };
-
-  pi.forEach((key, value) {
-    print("$key : $value");
-  });
 }
 
+/// --- APPLICATION PRINCIPALE ---
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
+      debugShowCheckedModeBanner: false,
       title: 'My Note',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: Home(),
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const Home(),
+        '/note': (context) => const Edition(),
+      },
     );
   }
 }
