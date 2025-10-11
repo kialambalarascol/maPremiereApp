@@ -2,7 +2,7 @@ name: flutter_application_1
 description: "A new Flutter project."
 publish_to: 'none' # Empêche la publication sur pub.dev
 
-version: 1.0.0+1
+version: 1.0.2
 
 # Configuration du nom de l'application
 launcher_name:

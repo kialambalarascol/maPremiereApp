@@ -10,6 +10,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  // ignore: non_constant_identifier_names
   List<Map<String, String>> Notes = [];
 
   TextEditingController titre = TextEditingController();
@@ -85,7 +86,7 @@ class _HomeState extends State<Home> {
                   child: ListTile(
                     title: Center(
                       child: Text(
-                        note["titre"] ?? "",
+                        note["titre"] ?? "" ,
                         style: const TextStyle(
                           fontSize: 20,
                           color: Colors.deepPurple,
@@ -186,4 +187,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-  
