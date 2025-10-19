@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/home.dart';
 import 'package:flutter_application_1/pages/note.dart';
+import 'package:flutter_application_1/notification.dart';
+
+
+
 
 void main() {
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  Notif().initNotif();
+  
   runApp(const MyApp());
 }
 

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_application_1/notification.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -93,12 +93,13 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
-                    onTap: () {
+                    onTap: (){
                       Navigator.pushNamed(
                         context,
                         '/note',
                         arguments: note,
                       );
+                      sauvegarde();
                     },
                     onLongPress: () {
                       suppression(index);
@@ -164,6 +165,10 @@ class _HomeState extends State<Home> {
                               ),
                             );
                           }
+                          Notif().affichage(
+                            titre:"yes",
+                            body: "peut mieux faire",
+                          );
                         },
                         child: const Text(
                           "Ajouter",
