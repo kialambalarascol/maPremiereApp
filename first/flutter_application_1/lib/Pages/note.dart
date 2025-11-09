@@ -45,7 +45,7 @@ class _EditionState extends State<Edition> {
       canPop: true,
       onPopInvokedWithResult: (bool sortie, Object? result) async {
         newsave();
-        Navigator.pop(context, note);
+        
         
       },
       child: Scaffold(
